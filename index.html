@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breathe Easy: The Journey of Oxygen</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4fbff;
+      color: #243447;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #5bbcff, #9ee7ff);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    nav {
+      background: white;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    nav a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: #0077b6;
+      font-weight: bold;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: white;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      color: #0077b6;
+      border-bottom: 3px solid #caf0f8;
+      padding-bottom: 8px;
+    }
+
+    .journey {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .step {
+      background: #e0f7ff;
+      border: 2px solid #90e0ef;
+      border-radius: 15px;
+      padding: 15px;
+      flex: 1 1 180px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .step:hover {
+      background: #caf0f8;
+      transform: scale(1.05);
+    }
+
+    #stepInfo {
+      margin-top: 20px;
+      padding: 20px;
+      background: #f1fcff;
+      border-left: 5px solid #00b4d8;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+
+    .lung-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .lung {
+      width: 120px;
+      height: 180px;
+      background: #ffb3c6;
+      border-radius: 60px 60px 50px 50px;
+      animation: breathe 3s infinite;
+      position: relative;
+    }
+
+    .lung::after {
+      content: "";
+      position: absolute;
+      top: 20px;
+      width: 40px;
+      height: 130px;
+      background: #ff8fab;
+      border-radius: 40px;
+      left: 40px;
+      opacity: 0.5;
+    }
+
+    @keyframes breathe {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .diagram {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .alveoli {
+      display: inline-block;
+      width: 90px;
+      height: 90px;
+      background: #ffd6e0;
+      border: 4px solid #ff8fab;
+      border-radius: 50%;
+      margin: 10px;
+      line-height: 90px;
+      font-weight: bold;
+    }
+
+    .capillary {
+      display: inline-block;
+      background: #caf0f8;
+      border: 3px solid #0077b6;
+      padding: 20px;
+      border-radius: 30px;
+      margin: 10px;
+      font-weight: bold;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #f1fcff;
+      border: 2px solid #ade8f4;
+      padding: 18px;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      min-height: 90px;
+    }
+
+    .card:hover {
+      background: #caf0f8;
+    }
+
+    .term {
+      font-weight: bold;
+      color: #0077b6;
+      font-size: 18px;
+    }
+
+    .definition {
+      display: none;
+      margin-top: 8px;
+    }
+
+    .quiz-question {
+      margin-bottom: 25px;
+      padding: 20px;
+      background: #f1fcff;
+      border-radius: 15px;
+    }
+
+    button {
+      background: #00b4d8;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #0077b6;
+    }
+
+    #quizResult {
+      font-size: 22px;
+      font-weight: bold;
+      color: #0077b6;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #0077b6;
+      color: white;
+      margin-top: 40px;
+    }
+
+    .highlight {
+      background: #fff3b0;
+      padding: 3px 6px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Breathe Easy</h1>
+    <p>The Journey of Oxygen Through the Respiratory System</p>
+  </header>
+
+  <nav>
+    <a href="#function">Function</a>
+    <a href="#journey">Oxygen Journey</a>
+    <a href="#breathing">Breathing</a>
+    <a href="#gas">Gas Exchange</a>
+    <a href="#vocab">Vocabulary</a>
+    <a href="#quiz">Quiz</a>
+  </nav>
+
+  <section id="function">
+    <h2>Overall Function of the Respiratory System</h2>
+    <p>
+      The <span class="highlight">respiratory system</span> helps the body breathe.
+      Its main job is to bring <span class="highlight">oxygen</span> into the body and remove
+      <span class="highlight">carbon dioxide</span>, which is a waste gas.
+    </p>
+    <p>
+      Oxygen is important because body cells need it to make energy. Without oxygen,
+      cells cannot work properly. The respiratory system works closely with the
+      circulatory system because the blood carries oxygen from the lungs to the rest of the body.
+    </p>
+  </section>
+
+  <section id="journey">
+    <h2>The Journey of Oxygen</h2>
+    <p>
+      Click each step to learn how oxygen travels through your body.
+    </p>
+
+    <div class="journey">
+      <div class="step" onclick="showStep('Air enters through the nose or mouth. The nose warms, moistens, and filters the air.')">1. Nose / Mouth</div>
+      <div class="step" onclick="showStep('Air passes through the pharynx, also called the throat. It is a passageway for air.')">2. Pharynx</div>
+      <div class="step" onclick="showStep('Air moves through the larynx, also known as the voice box.')">3. Larynx</div>
+      <div class="step" onclick="showStep('The trachea, or windpipe, carries air down toward the lungs.')">4. Trachea</div>
+      <div class="step" onclick="showStep('The trachea splits into two bronchi. Each bronchus leads to one lung.')">5. Bronchi</div>
+      <div class="step" onclick="showStep('Bronchioles are smaller tubes that spread air throughout the lungs.')">6. Bronchioles</div>
+      <div class="step" onclick="showStep('Alveoli are tiny air sacs where oxygen enters the blood and carbon dioxide leaves the blood.')">7. Alveoli</div>
+      <div class="step" onclick="showStep('Capillaries are tiny blood vessels around the alveoli. They pick up oxygen and carry it through the body.')">8. Blood</div>
+    </div>
+
+    <div id="stepInfo">
+      Click a step above to see the explanation.
+    </div>
+  </section>
+
+  <section id="breathing">
+    <h2>How Breathing Works</h2>
+
+    <div class="lung-box">
+      <div class="lung"></div>
+      <div class="lung"></div>
+    </div>
+
+    <p>
+      Breathing happens because of a muscle called the <span class="highlight">diaphragm</span>.
+      When you inhale, the diaphragm moves down and the chest cavity gets larger.
+      This pulls air into the lungs.
+    </p>
+
+    <p>
+      When you exhale, the diaphragm moves up and the chest cavity gets smaller.
+      This pushes air out of the lungs.
+    </p>
+
+    <p>
+      The lungs in the animation above grow and shrink to show inhalation and exhalation.
+    </p>
+  </section>
+
+  <section id="gas">
+    <h2>Gas Exchange in the Alveoli</h2>
+
+    <p>
+      The most important part of the respiratory system is the
+      <span class="highlight">alveoli</span>. Alveoli are tiny air sacs inside the lungs.
+      They have very thin walls and are surrounded by tiny blood vessels called capillaries.
+    </p>
+
+    <div class="diagram">
+      <div class="alveoli">Alveoli</div>
+      <span style="font-size: 28px;">⇄</span>
+      <div class="capillary">Capillaries / Blood</div>
+    </div>
+
+    <p>
+      Oxygen moves from the alveoli into the blood. At the same time, carbon dioxide moves
+      from the blood into the alveoli so it can be breathed out. This process is called
+      <span class="highlight">gas exchange</span>.
+    </p>
+
+    <p>
+      This shows how structure and function are connected: alveoli are tiny, thin, and surrounded
+      by blood vessels, so gases can move quickly and easily.
+    </p>
+  </section>
+
+  <section id="vocab">
+    <h2>Vocabulary Words</h2>
+    <p>Click each card to see the definition.</p>
+
+    <div class="vocab-grid">
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Respiratory System</div>
+        <div class="definition">The body system that brings in oxygen and removes carbon dioxide.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Oxygen</div>
+        <div class="definition">A gas the body needs to make energy.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Carbon Dioxide</div>
+        <div class="definition">A waste gas that the body needs to remove.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Nose</div>
+        <div class="definition">An opening that filters, warms, and moistens air.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Mouth</div>
+        <div class="definition">Another opening where air can enter the body.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Nasal Cavity</div>
+        <div class="definition">The space inside the nose where air is warmed and filtered.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Pharynx</div>
+        <div class="definition">The throat; a passageway for air.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Larynx</div>
+        <div class="definition">The voice box; air passes through it before entering the trachea.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Trachea</div>
+        <div class="definition">The windpipe that carries air toward the lungs.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Bronchi</div>
+        <div class="definition">Two large tubes that carry air from the trachea into the lungs.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Bronchioles</div>
+        <div class="definition">Small air tubes inside the lungs.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Alveoli</div>
+        <div class="definition">Tiny air sacs where gas exchange happens.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Lungs</div>
+        <div class="definition">The main organs of breathing.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Diaphragm</div>
+        <div class="definition">A muscle under the lungs that helps you breathe.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Inhalation</div>
+        <div class="definition">Breathing in air.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Exhalation</div>
+        <div class="definition">Breathing out air.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Gas Exchange</div>
+        <div class="definition">The movement of oxygen into the blood and carbon dioxide out of the blood.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Capillaries</div>
+        <div class="definition">Tiny blood vessels that surround the alveoli.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Hemoglobin</div>
+        <div class="definition">A protein in red blood cells that carries oxygen.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Cilia</div>
+        <div class="definition">Tiny hair-like structures that move mucus and dust out of the airway.</div>
+      </div>
+
+      <div class="card" onclick="toggleDefinition(this)">
+        <div class="term">Mucus</div>
+        <div class="definition">Sticky fluid that traps dust, germs, and dirt.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="quiz">
+    <h2>Mini Quiz</h2>
+    <p>Test what you learned!</p>
+
+    <div class="quiz-question">
+      <p>1. Where does gas exchange happen?</p>
+      <label><input type="radio" name="q1" value="wrong"> Trachea</label><br>
+      <label><input type="radio" name="q1" value="correct"> Alveoli</label><br>
+      <label><input type="radio" name="q1" value="wrong"> Nose</label>
+    </div>
+
+    <div class="quiz-question">
+      <p>2. What gas does the body need to make energy?</p>
+      <label><input type="radio" name="q2" value="correct"> Oxygen</label><br>
+      <label><input type="radio" name="q2" value="wrong"> Carbon dioxide</label><br>
+      <label><input type="radio" name="q2" value="wrong"> Smoke</label>
+    </div>
+
+    <div class="quiz-question">
+      <p>3. What muscle helps us breathe?</p>
+      <label><input type="radio" name="q3" value="wrong"> Heart</label><br>
+      <label><input type="radio" name="q3" value="correct"> Diaphragm</label><br>
+      <label><input type="radio" name="q3" value="wrong"> Stomach</label>
+    </div>
+
+    <div class="quiz-question">
+      <p>4. What does the trachea do?</p>
+      <label><input type="radio" name="q4" value="correct"> Carries air toward the lungs</label><br>
+      <label><input type="radio" name="q4" value="wrong"> Digests food</label><br>
+      <label><input type="radio" name="q4" value="wrong"> Pumps blood</label>
+    </div>
+
+    <div class="quiz-question">
+      <p>5. What waste gas do we breathe out?</p>
+      <label><input type="radio" name="q5" value="wrong"> Oxygen</label><br>
+      <label><input type="radio" name="q5" value="correct"> Carbon dioxide</label><br>
+      <label><input type="radio" name="q5" value="wrong"> Hemoglobin</label>
+    </div>
+
+    <button onclick="checkQuiz()">Submit Quiz</button>
+    <div id="quizResult"></div>
+  </section>
+
+  <footer>
+    <p>Science Fair Project | Breathe Easy: The Journey of Oxygen</p>
+  </footer>
+
+  <script>
+    function showStep(text) {
+      document.getElementById("stepInfo").innerText = text;
+    }
+
+    function toggleDefinition(card) {
+      const definition = card.querySelector(".definition");
+      if (definition.style.display === "block") {
+        definition.style.display = "none";
+      } else {
+        definition.style.display = "block";
+      }
+    }
+
+    function checkQuiz() {
+      let score = 0;
+      const total = 5;
+
+      for (let i = 1; i <= total; i++) {
+        const answer = document.querySelector('input[name="q' + i + '"]:checked');
+        if (answer && answer.value === "correct") {
+          score++;
+        }
+      }
+
+      document.getElementById("quizResult").innerText =
+        "You scored " + score + " out of " + total + "!";
+    }
+  </script>
+
+</body>
+</html>
